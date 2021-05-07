@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{%block conteudo%}
+
+<h1 class="mt-5">Minha agenda</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Telefone</th>
+        <th>Categoria</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contato in contatos %}
+    <!--ativa a caixa de seleção para mostrar ou ocultar contato na agenda -->
+    {% if contato.mostrar %}
+    <tr>
+        <td>
+            <a href="{% url 'ver_contato' contato.id %}">{{ contato.id }}</a>
+        </td>
+
+        <td>
+            <a href="{% url 'ver_contato' contato.id %}">{{ contato.nome }}</a>
+        </td>
+        <td>{{ contato.sobrenome }}</td>
+        <td>{{ contato.telefone }}</td>
+        <td>{{ contato.categoria }}</td>
+    </tr>
+    {%endif%}
+    {%endfor%}
+    </tbody>
+</table>
+
+<nav aria-label="Page Navigation">
+    <ul class="pagination">
+        {% for pagina in contatos.paginator.page_range %}
+        {% if contatos.number == pagina %}
+        <li class="page-item active">
+            <a class="page-link" href="?p={{ pagina }}&termo={{ resquest.GET.termo }}">{{pagina}}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?p={{ pagina }}&termo={{ resquest.GET.termo }}">{{pagina}}</a><!--termo ref pesquisa inserido par anão quebrar a paginação -->
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+
+{%endblock%}
