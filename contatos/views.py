@@ -46,6 +46,12 @@ def busca(request):
         )
         return redirect('index')
 
+    if not termo:
+        messages.add_message(
+            request,
+            messages.INFO,
+            'Contato Não Localizado.'
+        )
 
     if termo:
         messages.add_message(
@@ -53,12 +59,7 @@ def busca(request):
             messages.SUCCESS,
             'Contato Localizado.'
         )
-    else:
-        messages.add_message(
-            request,
-            messages.INFO,
-            'Contato Não Localizado.'
-        )
+
 
 
 
