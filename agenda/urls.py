@@ -20,5 +20,7 @@ from django.conf.urls.static import static#add img
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
     path('', include('contatos.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #cod para add img
+
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #cod para add img
