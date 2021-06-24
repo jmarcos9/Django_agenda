@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
@@ -47,8 +47,16 @@ def cadastro(request):
         messages.error(request, 'Email já existe')
         return render(request, 'accounts/cadastro.html')
 
+    messages.success(request, 'Cadastro Efetuado com Sucesso! Faça Login')
 
-    return render(request, 'accounts/cadastro.html')
+    user = User.objects.create_user(username=usuario,
+                                    email=email,
+                                    password=senha,
+                                    first_name=nome,
+                                    last_name=sobrenome)
+    user.save()
+
+    return redirect('login')
 
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
