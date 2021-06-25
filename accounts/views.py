@@ -25,10 +25,6 @@ def login(request):
         messages.success(request, 'Login efetuado com sucesso')
         return redirect('dashboard')
 
-
-
-
-
 def logout(request):
     auth.logout(request)
     return redirect('index')
