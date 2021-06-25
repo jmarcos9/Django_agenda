@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
-
 {% block conteudo %}
-dash
+<h1 class="mt-3 mb-3" > Olá {{ user.first_name }} {{ user.last_name }} </h1>
+{% csrf_token %}
+{% include 'parciais/_messages.html' %}
+<p>{{ user }}</p>
 {% endblock %}
